@@ -6,7 +6,7 @@ on:
 
 jobs:
     compile:
-        runs-on: self-hosted
+        runs-on: ubuntu-latest
         steps:
           - name: checkout the code from git
             uses: actions/checkout@v6
@@ -18,6 +18,6 @@ jobs:
               cache: 'maven' 
           - name: build with maven
             run: mvn compile
-            
+
                  
 
