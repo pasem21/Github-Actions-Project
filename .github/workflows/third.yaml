@@ -33,6 +33,6 @@ jobs:
         - name: login to ecr
           uses: aws-actions/amazon-ecr-login@v2
         - name: build with dokcer
-          run: docker build -t ${{secrets.ACCOUNT_ID}}.dkr.ecr.${{vars.AWS_REGION}}.amazonaws.com/${{vars.ECR_REPO}}:${{ github.run_number}}
+          run: docker build -t ${{secrets.ACCOUNT_ID}}.dkr.ecr.${{vars.AWS_REGION}}.amazonaws.com/${{vars.ECR_REPO}}:${{ github.run_number}} .
         - name: push to ecr
           run: docker push ${{secrets.ACCOUNT_ID}}.dkr.ecr.${{vars.AWS_REGION}}.amazonaws.com/${{vars.ECR_REPO}}:${{ github.run_number}}        
