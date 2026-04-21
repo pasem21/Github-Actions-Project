@@ -49,5 +49,5 @@ jobs:
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v4  
         - name: build with docker
-          run: docker build -t betapp:latest
+          run: docker build -t betapp:latest .
 
