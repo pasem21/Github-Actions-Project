@@ -22,14 +22,14 @@ jobs:
       needs: compile-the-code  
       runs-on: ubuntu-latest
       steps: 
-        - name: checkout
-          uses: actions/checkout@v6
-        - name: setup java
-          uses: actions/setup-java@v5
-          with:
-             distribution: 'temurin'
-             java-version: '25'
-             cache: 'maven'
+        # - name: checkout
+        #   uses: actions/checkout@v6
+        # - name: setup java
+        #   uses: actions/setup-java@v5
+        #   with:
+        #      distribution: 'temurin'
+        #      java-version: '25'
+        #      cache: 'maven'
         - name: test the code
           run: mvn test                 
 
