@@ -17,5 +17,5 @@ jobs:
              java-version: '25'
              cache: 'maven'
         - name: compile the code
-          run: mvn comile
-              
+          run: mvn compile
+
