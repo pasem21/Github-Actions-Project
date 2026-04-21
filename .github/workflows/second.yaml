@@ -31,5 +31,13 @@ jobs:
         #      java-version: '25'
         #      cache: 'maven'
         - name: test the code
-          run: mvn test                 
+          run: mvn test
+    package-the-code:
+      needs: test-the-code
+      runs-on: ubuntu-latest
+      steps:
+        - name: checkout
+          uses: actions/checkout@v6
+        - name: package the code
+          run: mvn clean package                             
 
