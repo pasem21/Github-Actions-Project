@@ -1,8 +1,7 @@
 name: mysecond-pipeline
 
 on: 
-  push:
-    branches: ["main"]
+  workflow_dispatch
 
 jobs:
     compile-the-code:
