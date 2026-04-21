@@ -1,0 +1,38 @@
+name: third pipeline
+
+on:
+  push:
+    branches: ["main"]    
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: checkout
+          uses: actions/checkout@v6
+        - name: setup java
+          uses: actions/setup-java@v5
+          with:
+            distribution: 'temurin'
+            java-version: '25'
+            cache: 'maven'
+        - name: compile code
+          run: mvn compile
+        - name: unit test
+          run: mvn test
+        - name: package
+          run: mvn clean package
+        - name: install docker
+          uses: docker/setup-buildx-action@v4
+        - name: configure aws
+          uses: aws-actions/configure-aws-credentials@v6.1.0
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: ${{env.AWS_REGION}}                   
+        - name: login to ecr
+          uses: aws-actions/amazon-ecr-login@v2
+        - name: build with dokcer
+          run: docker build -t ${{secrets.ACCOUNT_ID}}.dkr.ecr.${{env.AWS_REGION}}.amazonaws.com/${{env.ECR_REPO}}:${{ github.run_number}}
+        - name: push to ecr
+          run: docker push ${{secrets.ACCOUNT_ID}}.dkr.ecr.${{env.AWS_REGION}}.amazonaws.com/${{env.ECR_REPO}}:${{ github.run_number}}        
